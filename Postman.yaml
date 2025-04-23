@@ -1,0 +1,114 @@
+{
+  "info": {
+    "name": "Document Intelligence DR",
+    "_postman_id": "wrk_scratchpad",
+    "description": "Postman collection generated from Insomnia YAML"
+  },
+  "item": [
+    {
+      "name": "Step 1: Target Authorization",
+      "request": {
+        "url": {
+          "raw": "https://:Target-Endpoint/documentintelligence/documentModels:authorizeCopy?api-version=2024-11-30",
+          "host": ["https://:Target-Endpoint"],
+          "path": ["documentintelligence", "documentModels:authorizeCopy"],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2024-11-30"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "insomnia/11.0.2"
+          },
+          {
+            "key": "Ocp-Apim-Subscription-Key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"modelId\": \"target-model-name\", \"description\": \"Copied from SCUS\"}"
+        }
+      }
+    },
+    {
+      "name": "Step 2: Copy Operation from the Source Resource",
+      "request": {
+        "url": {
+          "raw": "https://:Target-Endpoint/documentintelligence/documentModels/:modelId:copyTo?api-version=2024-11-30",
+          "host": ["https://:Target-Endpoint"],
+          "path": ["documentintelligence", "documentModels", ":modelId:copyTo"],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2024-11-30"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "insomnia/11.0.2"
+          },
+          {
+            "key": "Ocp-Apim-Subscription-Key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"targetResourceId\": \"/subscriptions/{targetSub}/resourceGroups/{targetRG}/providers/Microsoft.CognitiveServices/accounts/{targetService}\", \"targetResourceRegion\": \"region\", \"targetModelId\": \"target-model-name\", \"targetModelLocation\": \"model path\", \"accessToken\": \"access token\", \"expirationDateTime\": \"timestamp\"}"
+        }
+      }
+    },
+    {
+      "name": "Step 3: Track Copy Status",
+      "request": {
+        "url": {
+          "raw": "https://:Target-Endpoint/documentintelligence/operations/:operation-id?api-version=2024-11-30",
+          "host": ["https://:Target-Endpoint"],
+          "path": ["documentintelligence", "operations", ":operation-id"],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2024-11-30"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "User-Agent",
+            "value": "insomnia/11.0.2"
+          },
+          {
+            "key": "Ocp-Apim-Subscription-Key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"targetResourceId\": \"/subscriptions/{targetSub}/resourceGroups/{targetRG}/providers/Microsoft.CognitiveServices/accounts/{targetService}\", \"targetResourceRegion\": \"region\", \"targetModelId\": \"target-model-name\", \"targetModelLocation\": \"model path\", \"accessToken\": \"access token\", \"expirationDateTime\": \"timestamp\"}"
+        }
+      }
+    }
+  ]
+}
